@@ -1,0 +1,16 @@
+{
+  "name": "harvest-hub",
+  "version": "1.0.0",
+  "description": "Harvest Hub - Farm to Market Platform",
+  "main": "server.js",
+  "scripts": {
+    "dev": "http-server ./Harvest_Hub-main/webapp -p 8080 -o",
+    "serve": "http-server ./Harvest_Hub-main/webapp -p 8080"
+  },
+  "keywords": ["agriculture", "farming", "market"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

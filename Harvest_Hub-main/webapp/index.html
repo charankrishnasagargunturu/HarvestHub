@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harvest Hub — Farm to Market</title>
+  <meta name="description"
+    content="Harvest Hub connects farmers to markets. Check crop prices, manage profile, and get farming tips." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Telugu&family=Noto+Sans+Devanagari&family=Noto+Sans+Tamil&family=Noto+Sans+Kannada&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ===================== PAGES ===================== -->
+
+  <!-- PAGE: Welcome -->
+  <div id="page-welcome" class="page active">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <nav class="top-nav glass">
+      <div class="nav-brand">
+        <img src="images/logo.png" alt="Harvest Hub Logo" class="nav-logo" />
+        <span class="nav-title" data-i18n="appName">Harvest Hub</span>
+      </div>
+      <div id="lang-picker-welcome" class="lang-picker"></div>
+    </nav>
+    <div class="hero-content">
+      <div class="hero-badge" data-i18n="empoweringFarmers">🌾 Empowering Farmers</div>
+      <h1 class="hero-heading"><span data-i18n="welcomeTo">Welcome to</span><br /><span class="gradient-text"
+          data-i18n="appName">Harvest Hub</span></h1>
+      <p class="hero-sub" data-i18n="heroSub">Connect directly with markets. Get real-time crop prices.</p>
+      <button class="btn-primary btn-large" onclick="navigate('login')">
+        <span data-i18n="getStarted">Get Started</span>
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </button>
+      <div class="hero-stats">
+        <div class="stat"><strong>50+</strong><span data-i18n="cropsListed">Crops Listed</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>36</strong><span data-i18n="statesCovered">States Covered</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong data-i18n="liveUpdates">Live</strong><span data-i18n="priceUpdates">Price
+            Updates</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: Login -->
+  <div id="page-login" class="page">
+    <div class="auth-bg"></div>
+    <div class="auth-container">
+      <div class="auth-card glass animate-in">
+        <div class="lang-picker-auth" id="lang-picker-login"></div>
+        <div class="auth-header">
+          <img src="images/logo.png" alt="logo" class="auth-logo" />
+          <h2 data-i18n="welcomeBack">Welcome Back</h2>
+          <p data-i18n="signInSub">Sign in to your Harvest Hub account</p>
+        </div>
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label data-i18n="phoneNumber">Phone Number</label>
+            <div class="input-wrap">
+              <span class="input-icon">📱</span>
+              <input type="tel" id="login-phone" data-i18n-placeholder="phonePlaceholder"
+                placeholder="10-digit mobile number" maxlength="10" />
+            </div>
+            <span class="field-error" id="login-phone-err"></span>
+          </div>
+          <div class="form-group">
+            <label data-i18n="password">Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="login-password" data-i18n-placeholder="passwordPlaceholder"
+                placeholder="Enter your password" />
+              <button type="button" class="toggle-pw" onclick="togglePw('login-password', this)">👁</button>
+            </div>
+            <span class="field-error" id="login-pass-err"></span>
+          </div>
+          <button type="submit" class="btn-primary btn-full">
+            <span data-i18n="login">Login</span>
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+          <button type="button" class="btn-ghost btn-full" onclick="navigate('forgot-password')"
+            data-i18n="forgotPassword">Forgot Password?</button>
+        </form>
+        <div class="auth-divider"><span data-i18n="newToHH">New to Harvest Hub?</span></div>
+        <button class="btn-outline btn-full" onclick="navigate('signup')" data-i18n="createAccount">Create an
+          Account</button>
+        <button class="btn-text" onclick="navigate('welcome')" data-i18n="backToHome">← Back to Home</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: Sign Up -->
+  <div id="page-signup" class="page">
+    <div class="auth-bg"></div>
+    <div class="auth-container">
+      <div class="auth-card glass animate-in">
+        <div class="lang-picker-auth" id="lang-picker-signup"></div>
+        <div class="auth-header">
+          <img src="images/logo.png" alt="logo" class="auth-logo" />
+          <h2 data-i18n="createAccountTitle">Create Account</h2>
+          <p data-i18n="joinCommunity">Join the Harvest Hub community</p>
+        </div>
+        <form id="signup-form" onsubmit="handleSignup(event)">
+          <div class="form-group">
+            <label data-i18n="fullName">Full Name</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="su-name" data-i18n-placeholder="namePlaceholder" placeholder="Your full name" />
+            </div>
+            <span class="field-error" id="su-name-err"></span>
+          </div>
+          <div class="form-group">
+            <label data-i18n="phoneNumber">Phone Number</label>
+            <div class="input-wrap">
+              <span class="input-icon">📱</span>
+              <input type="tel" id="su-phone" data-i18n-placeholder="phonePlaceholder"
+                placeholder="10-digit mobile number" maxlength="10" />
+            </div>
+            <span class="field-error" id="su-phone-err"></span>
+          </div>
+          <div class="form-group">
+            <label data-i18n="localityLabel">Locality / Village</label>
+            <div class="input-wrap">
+              <span class="input-icon">📍</span>
+              <input type="text" id="su-locality" data-i18n-placeholder="localityPlaceholder"
+                placeholder="Your village or town" />
+            </div>
+            <span class="field-error" id="su-locality-err"></span>
+          </div>
+          <div class="form-group">
+            <label data-i18n="password">Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="su-password" data-i18n-placeholder="passwordPlaceholder"
+                placeholder="Create a strong password" />
+              <button type="button" class="toggle-pw" onclick="togglePw('su-password', this)">👁</button>
+            </div>
+            <span class="field-error" id="su-pass-err"></span>
+          </div>
+          <div class="form-group">
+            <label data-i18n="confirmPassword">Confirm Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="su-confirm" data-i18n-placeholder="confirmPlaceholder"
+                placeholder="Re-enter your password" />
+              <button type="button" class="toggle-pw" onclick="togglePw('su-confirm', this)">👁</button>
+            </div>
+            <span class="field-error" id="su-confirm-err"></span>
+          </div>
+          <button type="submit" class="btn-primary btn-full">
+            <span data-i18n="signUp">Sign Up</span>
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
+        </form>
+        <button class="btn-text" onclick="navigate('login')" data-i18n="backToLogin">← Back to Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: Home -->
+  <div id="page-home" class="page">
+    <div class="app-shell">
+      <header class="app-header glass">
+        <div class="app-header-inner">
+          <div class="app-brand">
+            <img src="images/logo.png" alt="logo" class="nav-logo" />
+            <div>
+              <div class="app-title" data-i18n="appName">Harvest Hub</div>
+              <div class="app-greeting" id="home-greeting">Good morning, Farmer!</div>
+            </div>
+          </div>
+          <div class="header-actions">
+            <div id="lang-picker-home" class="lang-picker-inline"></div>
+            <button class="icon-btn" onclick="navigate('notifications')" title="Notifications">🔔<span
+                class="badge">5</span></button>
+            <button class="icon-btn" onclick="navigate('profile')" title="Profile">👤</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="home-main">
+        <div class="home-banner">
+          <div class="home-banner-text">
+            <h2 data-i18n="todaysMarket">Today's Market</h2>
+            <p data-i18n="realtimePrices">Real-time prices for your harvest</p>
+            <button class="btn-primary" onclick="navigate('search')" data-i18n="checkPrices">Check Prices →</button>
+          </div>
+          <div class="home-banner-img">🌾</div>
+        </div>
+        <section class="section">
+          <h3 class="section-title" data-i18n="quickActions">Quick Actions</h3>
+          <div class="action-grid">
+            <div class="action-card" onclick="navigate('search')">
+              <div class="action-icon">🔍</div>
+              <div class="action-label" data-i18n="searchPrices">Search Prices</div>
+            </div>
+            <div class="action-card" onclick="navigate('notifications')">
+              <div class="action-icon">📢</div>
+              <div class="action-label" data-i18n="farmingTips">Farming Tips</div>
+            </div>
+            <div class="action-card" onclick="navigate('profile')">
+              <div class="action-icon">👤</div>
+              <div class="action-label" data-i18n="myProfile">My Profile</div>
+            </div>
+            <div class="action-card" onclick="navigate('weather')">
+              <div class="action-icon">🌤️</div>
+              <div class="action-label" data-i18n="weatherSoon">Weather (Soon)</div>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <h3 class="section-title" data-i18n="topCropPrices">Top Crop Prices Today</h3>
+          <div class="crop-cards" id="crop-highlights"></div>
+        </section>
+        <section class="section">
+          <h3 class="section-title" data-i18n="farmingTips">Farming Tips</h3>
+          <div class="tip-card glass">
+            <div class="tip-icon">💡</div>
+            <p id="tip-text"></p>
+          </div>
+          <div class="tip-dots" id="tip-dots"></div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav glass">
+        <button class="bnav-btn active" onclick="navigate('home')"><span>🏠</span><span
+            data-i18n="home">Home</span></button>
+        <button class="bnav-btn" onclick="navigate('search')"><span>🔍</span><span
+            data-i18n="search">Search</span></button>
+        <button class="bnav-btn" onclick="navigate('notifications')"><span>🔔</span><span
+            data-i18n="tips">Tips</span></button>
+        <button class="bnav-btn" onclick="navigate('profile')"><span>👤</span><span
+            data-i18n="profile">Profile</span></button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PAGE: Search -->
+  <div id="page-search" class="page">
+    <div class="app-shell">
+      <header class="app-header glass">
+        <div class="app-header-inner">
+          <button class="back-btn" onclick="navigate('home')" data-i18n="back">← Back</button>
+          <h2 class="page-heading" data-i18n="cropPriceSearch">Crop Price Search</h2>
+          <div id="lang-picker-search" class="lang-picker-inline"></div>
+        </div>
+      </header>
+      <main class="search-main">
+        <div class="search-hero glass">
+          <p class="search-hero-label" data-i18n="searchHeroLabel">Find current market prices for crops across India</p>
+        </div>
+        <div class="search-form-card glass">
+          <div class="form-group">
+            <label data-i18n="selectState">🗺️ Select State</label>
+            <div class="custom-select-wrap">
+              <select id="search-state" onchange="updateSearchPrice()">
+                <option value="" data-i18n="chooseState">-- Choose a State --</option>
+              </select>
+              <span class="select-arrow">▾</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="selectCrop">🌿 Select Crop</label>
+            <div class="custom-select-wrap">
+              <select id="search-crop" onchange="updateSearchPrice()">
+                <option value="" data-i18n="chooseCrop">-- Choose a Crop --</option>
+              </select>
+              <span class="select-arrow">▾</span>
+            </div>
+          </div>
+          <button class="btn-primary btn-full" onclick="fetchCropPrice()">
+            <span data-i18n="fetchCropPrice">Fetch Crop Price</span><span>💰</span>
+          </button>
+        </div>
+        <div id="price-result" class="price-result-card glass hidden">
+          <div class="price-crop-name" id="pr-crop"></div>
+          <div class="price-state-name" id="pr-state"></div>
+          <div class="price-amount" id="pr-amount"></div>
+          <div class="price-per" data-i18n="perKilogram">per kilogram</div>
+          <div class="price-range" id="pr-range"></div>
+        </div>
+        <div class="all-prices-section">
+          <h3 class="section-title" data-i18n="allCropsGlance">All Crops at a Glance</h3>
+          <div class="prices-table-wrap">
+            <table class="prices-table">
+              <thead>
+                <tr>
+                  <th data-i18n="crop">Crop</th>
+                  <th data-i18n="minPrice">Min (₹/kg)</th>
+                  <th data-i18n="maxPrice">Max (₹/kg)</th>
+                </tr>
+              </thead>
+              <tbody id="prices-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+      <nav class="bottom-nav glass">
+        <button class="bnav-btn" onclick="navigate('home')"><span>🏠</span><span data-i18n="home">Home</span></button>
+        <button class="bnav-btn active" onclick="navigate('search')"><span>🔍</span><span
+            data-i18n="search">Search</span></button>
+        <button class="bnav-btn" onclick="navigate('notifications')"><span>🔔</span><span
+            data-i18n="tips">Tips</span></button>
+        <button class="bnav-btn" onclick="navigate('profile')"><span>👤</span><span
+            data-i18n="profile">Profile</span></button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PAGE: Notifications -->
+  <div id="page-notifications" class="page">
+    <div class="app-shell">
+      <header class="app-header glass">
+        <div class="app-header-inner">
+          <button class="back-btn" onclick="navigate('home')" data-i18n="back">← Back</button>
+          <h2 class="page-heading" data-i18n="appName">Harvest Hub</h2>
+          <div id="lang-picker-notif" class="lang-picker-inline"></div>
+        </div>
+      </header>
+      <main class="notif-main">
+        <div class="notif-section">
+          <div class="notif-section-header"><span class="notif-icon">🚨</span>
+            <h3 data-i18n="emergencyAlerts">Emergency Alerts</h3>
+          </div>
+          <div class="alert-card glass">
+            <p class="no-alert" data-i18n="noAlerts">✅ No emergency alerts as of now. Your crops are safe!</p>
+          </div>
+        </div>
+        <div class="notif-section">
+          <div class="notif-section-header"><span class="notif-icon">💡</span>
+            <h3 data-i18n="generalTips">General Farming Tips</h3>
+          </div>
+          <div id="tips-list" class="tips-list"></div>
+        </div>
+        <div class="notif-section">
+          <div class="notif-section-header"><span class="notif-icon">📅</span>
+            <h3 data-i18n="seasonalAdvice">Seasonal Advice</h3>
+          </div>
+          <div class="seasonal-grid" id="seasonal-grid"></div>
+        </div>
+      </main>
+      <nav class="bottom-nav glass">
+        <button class="bnav-btn" onclick="navigate('home')"><span>🏠</span><span data-i18n="home">Home</span></button>
+        <button class="bnav-btn" onclick="navigate('search')"><span>🔍</span><span
+            data-i18n="search">Search</span></button>
+        <button class="bnav-btn active" onclick="navigate('notifications')"><span>🔔</span><span
+            data-i18n="tips">Tips</span></button>
+        <button class="bnav-btn" onclick="navigate('profile')"><span>👤</span><span
+            data-i18n="profile">Profile</span></button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PAGE: Profile -->
+  <div id="page-profile" class="page">
+    <div class="app-shell">
+      <header class="app-header glass">
+        <div class="app-header-inner">
+          <button class="back-btn" onclick="navigate('home')" data-i18n="back">← Back</button>
+          <h2 class="page-heading" data-i18n="myProfileTitle">My Profile</h2>
+          <div id="lang-picker-profile" class="lang-picker-inline"></div>
+        </div>
+      </header>
+      <main class="profile-main">
+        <div class="profile-hero glass">
+          <div class="avatar-circle" id="profile-avatar">🧑‍🌾</div>
+          <h2 id="profile-name">Your Name</h2>
+          <p id="profile-locality-tag" class="locality-tag">📍 Your Locality</p>
+        </div>
+        <div class="profile-info-card glass">
+          <div class="info-row"><span class="info-label" data-i18n="phone">📱 Phone</span><span class="info-value"
+              id="profile-phone">Not set</span></div>
+          <div class="info-row"><span class="info-label" data-i18n="locality">📍 Locality</span><span class="info-value"
+              id="profile-locality">Not set</span></div>
+          <div class="info-row"><span class="info-label" data-i18n="accountStatus">👤 Account</span><span
+              class="info-value" data-i18n="activeFarmer">Active Farmer</span></div>
+        </div>
+        <div class="profile-actions">
+          <button class="btn-outline btn-full" onclick="navigate('search')" data-i18n="checkCropPrices">🔍 Check Crop
+            Prices</button>
+          <button class="btn-outline btn-full" onclick="navigate('notifications')" data-i18n="viewFarmingTips">📢 View
+            Farming Tips</button>
+          <button class="btn-danger btn-full" onclick="logout()" data-i18n="logout">🚪 Logout</button>
+        </div>
+      </main>
+      <nav class="bottom-nav glass">
+        <button class="bnav-btn" onclick="navigate('home')"><span>🏠</span><span data-i18n="home">Home</span></button>
+        <button class="bnav-btn" onclick="navigate('search')"><span>🔍</span><span
+            data-i18n="search">Search</span></button>
+        <button class="bnav-btn" onclick="navigate('notifications')"><span>🔔</span><span
+            data-i18n="tips">Tips</span></button>
+        <button class="bnav-btn active" onclick="navigate('profile')"><span>👤</span><span
+            data-i18n="profile">Profile</span></button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PAGE: Forgot Password -->
+  <div id="page-forgot-password" class="page">
+    <div class="auth-bg"></div>
+    <div class="auth-container">
+      <div class="auth-card glass animate-in">
+        <div class="auth-header">
+          <div class="auth-icon-big">🔑</div>
+          <h2 data-i18n="resetPassword">Reset Password</h2>
+          <p data-i18n="resetSub">We'll send an OTP to verify your identity</p>
+        </div>
+        <div id="fp-step-1">
+          <div class="form-group">
+            <label data-i18n="phoneNumber">Phone Number</label>
+            <div class="input-wrap"><span class="input-icon">📱</span><input type="tel" id="fp-phone"
+                data-i18n-placeholder="phonePlaceholder" placeholder="10-digit mobile number" maxlength="10" /></div>
+          </div>
+          <button class="btn-primary btn-full" onclick="sendOTP()" data-i18n="sendOTP">Send OTP</button>
+        </div>
+        <div id="fp-step-2" class="hidden">
+          <div class="otp-info" data-i18n="otpSent">📲 OTP sent to your phone</div>
+          <div class="form-group">
+            <label data-i18n="enterOTP">Enter OTP</label>
+            <div class="otp-boxes">
+              <input type="text" maxlength="1" class="otp-box" oninput="otpMove(this,0)" />
+              <input type="text" maxlength="1" class="otp-box" oninput="otpMove(this,1)" />
+              <input type="text" maxlength="1" class="otp-box" oninput="otpMove(this,2)" />
+              <input type="text" maxlength="1" class="otp-box" oninput="otpMove(this,3)" />
+            </div>
+          </div>
+          <button class="btn-primary btn-full" onclick="verifyOTP()" data-i18n="verifyOTP">Verify OTP</button>
+        </div>
+        <div id="fp-step-3" class="hidden">
+          <div class="form-group">
+            <label data-i18n="newPassword">New Password</label>
+            <div class="input-wrap"><span class="input-icon">🔒</span><input type="password" id="fp-newpass"
+                data-i18n-placeholder="newPassPlaceholder" /><button type="button" class="toggle-pw"
+                onclick="togglePw('fp-newpass',this)">👁</button></div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="confirmNewPass">Confirm New Password</label>
+            <div class="input-wrap"><span class="input-icon">🔒</span><input type="password" id="fp-confirm"
+                data-i18n-placeholder="confirmNewPassPlaceholder" /><button type="button" class="toggle-pw"
+                onclick="togglePw('fp-confirm',this)">👁</button></div>
+          </div>
+          <button class="btn-primary btn-full" onclick="resetPassword()" data-i18n="resetBtn">Reset Password</button>
+        </div>
+        <button class="btn-text" onclick="navigate('login')" data-i18n="backToLogin">← Back to Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="crop_names.js"></script>
+  <script src="translations.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
